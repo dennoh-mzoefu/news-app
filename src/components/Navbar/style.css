@@ -17,6 +17,7 @@
     border-radius: 50%;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
     margin: 5px 10px;
+    cursor: pointer;
 }
 
 .left__nav {
@@ -26,9 +27,16 @@
 
 .left__nav>button {
     /* margin: */
+    cursor: pointer;
     padding: 10px 20px;
     border-radius: 15px;
     background-color: white;
     /* border: 1px solid rgba(0, 0, 0, .1); */
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+    /* box-shadow: 2px 2px 2px rgba(0, 0, 0, .2); */
+    box-shadow: 2px 2px 2px chocolate;
+    border: solid 1px rgba(210, 105, 30, .3);
+}
+
+.left__nav>button:active {
+    background-color: blue;
 }

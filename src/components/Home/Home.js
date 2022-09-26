@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
 import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
+import { fetchNewsItem } from "../../redux/actions/newsActions";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
-  const { news } = useSelector((state) => state.newsReducer);
+  const { news, darkMode } = useSelector((state) => state.newsReducer);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const itemsPerPage = 6;
@@ -15,11 +17,12 @@ function Home() {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
+
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(news.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(news.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, news]);
-
+  const navigate = useNavigate();
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % news.length;
@@ -28,14 +31,34 @@ function Home() {
     );
     setItemOffset(newOffset);
   };
+
+  const dispatch = useDispatch();
+  const handleNewsItem = (e, item) => {
+    e.preventDefault();
+    dispatch(fetchNewsItem(item));
+    navigate("/newsItem");
+  };
+  const darkModeCss = {
+    backgroundColor: "black",
+    color: "white",
+  };
+  const darkModeCssChild = {
+    backgroundColor: "rgba(255, 255, 255, .3)",
+    color: "white",
+    boxShadow: "2px 2px 2px  rgba(210, 105, 30, .3)",
+  };
   return (
-    <div className="whole__home">
-      <div className="home">
+    <div style={darkMode ? darkModeCss : {}} className="whole__home">
+      <div style={darkMode ? darkModeCss : {}} className="home">
         {/* newscard */}
         {currentItems &&
           currentItems?.map((item) => {
             return (
-              <div className="news__card">
+              <div
+                key={item.publishedAt}
+                style={darkMode ? darkModeCssChild : {}}
+                className="news__card"
+              >
                 <div className="upper__card">
                   <img src={item.urlToImage} alt="news illustartor" />
                 </div>
@@ -45,7 +68,9 @@ function Home() {
                 </div>
                 <div className="lower__card">
                   <p>{item.publishedAt}</p>
-                  <button>more</button>
+                  {/* <Link to="/newsItem"> */}
+                  <button onClick={(e) => handleNewsItem(e, item)}>more</button>
+                  {/* </Link> */}
                 </div>
               </div>
             );

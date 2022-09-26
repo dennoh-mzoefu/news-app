@@ -1,0 +1,11 @@
+.categories {
+    /* border: solid; */
+    display: flex;
+    padding: 15px 40px;
+}
+
+.categories .left__nav {
+    display: flex;
+    min-width: 70%;
+    justify-content: space-around;
+}

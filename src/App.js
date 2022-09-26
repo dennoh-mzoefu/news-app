@@ -4,6 +4,9 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getNews } from "./redux/actions/newsActions";
 import { useEffect } from "react";
+import Categories from "./components/Categories/Categories";
+import NewsDescription from "./components/NewsDescription/NewsDescription";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const { news, searchParam, searchTerm, initialParam, category } = useSelector(
@@ -19,8 +22,21 @@ function App() {
   }, [searchTerm, initialParam, category]);
   return (
     <div className="App">
-      <Navbar />
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <Navbar />
+                <Categories />
+                <Home />
+              </div>
+            }
+          />
+          <Route path="/newsItem" element={<NewsDescription />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

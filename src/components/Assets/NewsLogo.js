@@ -1,6 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import newsReducer from "../../redux/reducers/newsReducer";
 
 function NewsLogo() {
+  const { darkMode } = useSelector((state) => state.newsReducer);
+  const darkModeCss = {
+    backgroundColor: "black",
+  };
   return (
     <div>
       <svg
@@ -13,7 +19,7 @@ function NewsLogo() {
       >
         <g
           transform="translate(0.000000,219.000000) scale(0.100000,-0.100000)"
-          fill="#000000"
+          fill={darkMode ? "white" : "#000000"}
           stroke="none"
         >
           <path

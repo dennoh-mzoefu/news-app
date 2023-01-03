@@ -7,7 +7,9 @@ function Categories() {
   const dispatch = useDispatch();
   const handleCategories = (e, payload) => {
     e.preventDefault();
+    payload = "category=" + payload;
     const data = { name: "category", data: payload };
+    console.log(payload);
     dispatch(joinString(data));
   };
   const darkModeCss = {
@@ -25,9 +27,9 @@ function Categories() {
       <div className="left__nav">
         <button
           style={darkMode ? darkModeCssChild : {}}
-          onClick={(e) => handleCategories(e, "business")}
+          onClick={(e) => handleCategories(e, "general")}
         >
-          Business
+          General
         </button>
         <button
           style={darkMode ? darkModeCssChild : {}}
@@ -55,9 +57,9 @@ function Categories() {
         </button>
         <button
           style={darkMode ? darkModeCssChild : {}}
-          onClick={(e) => handleCategories(e, "economy")}
+          onClick={(e) => handleCategories(e, "technology")}
         >
-          Economy
+          Technology
         </button>
       </div>
     </div>

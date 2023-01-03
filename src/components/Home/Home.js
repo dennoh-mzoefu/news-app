@@ -90,7 +90,7 @@ function Home() {
         nextLinkClassName="page-num"
         activeLinkClassName="active"
         previousClassName="prevName"
-        nextClassName="prevName"
+        nextClassName=""
       />
     </div>
   );

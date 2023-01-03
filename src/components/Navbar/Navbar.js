@@ -16,10 +16,11 @@ function Navbar() {
     setMode(!mode);
     dispatch(changeModeAction(mode));
   };
-  const topHeadline = false;
+  const [topHeadline, setTopHeadline] = useState(false);
+  // const topHeadline = false;
   const handleTopHeadline = (e) => {
     e.preventDefault();
-    topHeadline = !topHeadline;
+    setTopHeadline(true);
     const data = {
       name: "",
       data: topHeadline ? "top-headlines?" : "everything?",
